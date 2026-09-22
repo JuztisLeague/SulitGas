@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <div className="app-title">
     <h1>SulitGas Watch</h1>
-    <Link to="/report">Report a Price</Link>
      <input 
     type="text"
     placeholder="Search station or area"
