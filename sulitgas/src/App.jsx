@@ -7,13 +7,19 @@ import StationList from "./StationList";
 export default function App() {
 
   const [fuel, setFuel] = useState("diesel");
-
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <div>
+    <div className="app-title">
     <h1>SulitGas Watch</h1>
+     <input 
+    type="text"
+    placeholder="Search station or area"
+    value = {searchTerm}
+    onChange ={(e) => setSearchTerm(e.target.value)}
+    className="search-input"></input>
     <FuelToggle fuel={fuel} setFuel={setFuel} />
-    <StationList stations = {stations} fuel = {fuel}/>
+    <StationList stations = {stations} fuel = {fuel} searchTerm = {searchTerm}/>
     </div>
   );
 }

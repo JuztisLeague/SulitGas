@@ -8,7 +8,12 @@
   --text: #DB7107;
   --text-muted: #9AA39C;
 }
-
+#root{
+  border:none;
+}
+.app-title{
+  border: none;
+}
 body{
   background: var(--bg);
   color: var(--text);
@@ -80,4 +85,34 @@ font-size: 1.1rem;
 .station-time{
   color: var(--text-muted);
   font-size: 0.8rem;
+}
+
+.search-input {
+  display:block;
+  width: 100%;
+  max-width: 400px;
+  margin: 16px auto;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: var(--card-bg);
+  color: var(--text-nuted);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.buttonToggle{
+
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+
+}
+
+button{
+  border-radius: 50px;
+  background: var(--card-bg);
+  padding: 10px;
+  font-size: medium;
+  border: 2px solid #9AA39C;
 }

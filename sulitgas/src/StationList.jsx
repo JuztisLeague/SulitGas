@@ -1,6 +1,11 @@
-export default function StationList ({stations, fuel}) {
-    
-const sortedStations = [...stations].sort((a, b) => a[fuel] - b[fuel]);
+export default function StationList ({stations, fuel, searchTerm}) {
+
+const filteredStations = stations.filter((station) =>
+station.name.toLowerCase(). includes(searchTerm.toLowerCase())
+);   
+const sortedStations = [...filteredStations].sort((a, b) => a[fuel] - b[fuel]);
+
+
 
 function timeAgo(isoString){
   const minutes = Math.floor((Date.now() - new Date(isoString)) / 60000);
@@ -13,7 +18,13 @@ return(
      <ul className="station-list">
         {sortedStations.map((station)  => {
 
-          const brandKey = fuel === "diesel" ? "brandDiesel" : "brandGasoline";
+          const brandKeyMap = {
+            diesel: "brandDiesel",
+            gasoline: "brandGasoline",
+            premium: "brandPremium",
+            kerosene: "brandKerosene"
+          }
+          const brandKey = brandKeyMap[fuel];
           const diff = station[fuel] - station[brandKey];
           const isAboveBrand = diff > 0.5;
 
