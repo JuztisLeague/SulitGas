@@ -1,25 +1,16 @@
+import {Routes, Route} from "react-router-dom";
+import Home from "./pages/Home";
+import Report from "./pages/Report";
 import "./App.css";
-import {useState} from "react";
-import {stations} from "./data/stations";
-import FuelToggle from "./FuelToggle";
-import StationList from "./StationList";
 
 export default function App() {
-
-  const [fuel, setFuel] = useState("diesel");
-  const [searchTerm, setSearchTerm] = useState("");
-
   return (
-    <div className="app-title">
-    <h1>SulitGas Watch</h1>
-     <input 
-    type="text"
-    placeholder="Search station or area"
-    value = {searchTerm}
-    onChange ={(e) => setSearchTerm(e.target.value)}
-    className="search-input"></input>
-    <FuelToggle fuel={fuel} setFuel={setFuel} />
-    <StationList stations = {stations} fuel = {fuel} searchTerm = {searchTerm}/>
-    </div>
-  );
+    <Routes>
+      <Route path="/" element={<Home />} />
+
+      <Route path = "/report" element={<Report />} />
+      
+
+    </Routes>
+  )
 }
