@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
 import {stations as initialStations} from "./data/stations";
 import NavBar from "./NavBar";
@@ -9,8 +9,16 @@ import News from "./pages/News";
 import Ask from "./pages/Ask";
 
 export default function App() {
-  const [stations, setStations] = useState(initialStations)
+  const [stations, setStations] = useStates(() => {
+  const saved = localStorage.getItem("sulitgas-stations");
+  return saved ? JSON.parse(saved) : initialStations;
+  })
   
+  useEffect(() => {
+    localStorage.setItem("sulitgas-stations", JSON.stringify(stations));
+  }, [stations]);
+
+
   function handleReport(newReport) {
     setStations((prevStations) => {
       const existingIndex = prevStations.findIndex(
