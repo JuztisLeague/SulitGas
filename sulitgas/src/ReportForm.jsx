@@ -1,13 +1,27 @@
 import {useState} from "react";
 
-export default function ReportForm() {
+export default function ReportForm({onReport}) {
 
 const [stationName, setStationName] = useState("");
 const [fuelType, setFuelType] = useState("diesel");
 const [price, setPrice] = useState("");
 
+function handleSubmit(e) {
+    e.preventDefault();
+
+    onReport({
+       name: stationName,
+       fuelType: fuelType,
+       price: Number(price) 
+    })
+
+    setStationName("");
+    setFuelType("diesel");
+    setPrice("");
+}
+
 return (
-    <form className="report-form">
+    <form className="report-form" onSubmit={handleSubmit}>
 
         <label className="form-label">
             Station Name
@@ -44,7 +58,7 @@ return (
             className="form-input"/>
         </label>
         
-        <button type="submit">Submit Report</button>
+        <button type="submit" className= "report-cta">Submit Report</button>
     </form>
 )
 

@@ -1,10 +1,10 @@
 import ReportForm from "../ReportForm";
 
-export default function Report() {
+export default function Report({onReport}) {
   return (
     <div className="report-page">
       <h1 className="app-title">Report a price</h1>
-      <ReportForm />
+      <ReportForm onReport = {onReport}/>
     </div>
   );
 }
