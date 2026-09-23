@@ -1,22 +1,22 @@
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {House, PenLine, Newspaper, Send} from "lucide-react";
 
 export default function NavBar() {
 
     return (
         <nav className="bottom-nav">
-            <Link to="/">
+            <NavLink to="/" end className={({isActive}) => (isActive ? "active" : "")}>
             <House size = {20}/>
-            </Link>
-            <Link to="/news">
+            </NavLink>
+            <NavLink to="/news" className={({isActive}) => (isActive ? "active" : "")}>
             <Newspaper size = {20}/>
-            </Link>
-            <Link to="/report">
+            </NavLink>
+            <NavLink to="/report" className={({isActive}) => (isActive ? "active" : "")}>
             <PenLine size = {20}/>
-            </Link>
-            <Link to="/ask">
+            </NavLink>
+            <NavLink to="/ask" className={({isActive}) => (isActive ? "active" : "")}>
             <Send size = {20}/>
-            </Link>
+            </NavLink>
         </nav>
     )
 }
