@@ -194,3 +194,58 @@ button{
   text-align: center;
   font-size: 1rem;
 }
+
+
+.gauge-card{
+  text-align: center;
+  width: 140px
+}
+
+.gauge-ring{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) 0deg 252deg, var(--card-bg) 252deg 360deg);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-inner{
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-price{
+  color: var(-text);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.gauge-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 8px 0 2px;
+}
+
+.gauge-trend{
+  font-size: 0.8rem;
+}
+
+.gauge-trend.up{color: var(--bad);}
+.gauge-trend.down{color: var(--good);}
+.gauge-trend.flat{color: var(--text-muted);}
+
+.gauge-grid{
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  max-width: 500px;
+  margin: 16px auto;
+}
