@@ -1,7 +1,8 @@
 export default function StationList ({stations, fuel, searchTerm}) {
 
 const filteredStations = stations.filter((station) =>
-station.name.toLowerCase(). includes(searchTerm.toLowerCase())
+station.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+station.barangay.toLowerCase().includes(searchTerm.toLowerCase())
 );   
 const sortedStations = [...filteredStations].sort((a, b) => a[fuel] - b[fuel]);
 
