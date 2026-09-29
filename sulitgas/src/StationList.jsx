@@ -1,12 +1,12 @@
-export default function StationList ({stations, fuel, searchTerm}) {
+import { getDistanceKm } from "./utils/distance";
+
+export default function StationList ({stations, fuel, searchTerm, userLocation}) {
 
 const filteredStations = stations.filter((station) =>
 station.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
 station.barangay.toLowerCase().includes(searchTerm.toLowerCase())
 );   
 const sortedStations = [...filteredStations].sort((a, b) => a[fuel] - b[fuel]);
-
-
 
 function timeAgo(isoString){
   const minutes = Math.floor((Date.now() - new Date(isoString)) / 60000);
@@ -28,11 +28,14 @@ return(
           const brandKey = brandKeyMap[fuel];
           const diff = station[fuel] - station[brandKey];
           const isAboveBrand = diff > 0.5;
+          const distance = userLocation
+          ? getDistanceKm(userLocation.lat, userLocation.lng, station.lat, station.lng). toFixed(1)
+          : station.distanceKm;
 
           return(
             <li key={station.name} className="station-card">
             <div className="station-name">{station.name}</div> 
-             <div className="station-distance">{station.distanceKm} km away</div>
+             <div className="station-distance">{distance} km away</div>
             <div className="station-price">₱{station[fuel]}</div>
             <span className= {`station-tag ${isAboveBrand ? "bad" : "good"}`}>
               {isAboveBrand

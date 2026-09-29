@@ -55,5 +55,4 @@ export const stations = [
       brandKerosene: 114.50, 
       distanceKm: 3.1, 
       reportedAt: "2026-09-22T04:30:00+08:00"}
-
   ];

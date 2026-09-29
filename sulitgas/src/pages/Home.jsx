@@ -41,7 +41,7 @@ export default function Home({stations}) {
 
     {locationError && <p style={{color: "var(--bad)"}}>{locationError}</p>}
     <FuelToggle fuel={fuel} setFuel={setFuel} />
-    <StationList stations = {stations} fuel = {fuel} searchTerm = {searchTerm}/>
+    <StationList stations = {stations} fuel = {fuel} searchTerm = {searchTerm} userLocation={userLocation}/>
     </div>
   );
 }
