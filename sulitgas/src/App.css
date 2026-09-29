@@ -88,11 +88,19 @@ font-size: 1.1rem;
   font-size: 0.8rem;
 }
 
-.search-input {
-  display:block;
-  width: 100%;
+.search-bar{
+  display: flex;
+  gap: 8px;
   max-width: 400px;
   margin: 16px auto;
+}
+
+.search-bar .search-input {
+  display:block;
+  flex: 1;
+  width: 100%;
+  max-width: 400px;
+  margin: 0;
   padding: 10px 14px;
   border-radius: 10px;
   border: none;

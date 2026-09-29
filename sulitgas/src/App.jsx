@@ -9,7 +9,7 @@ import News from "./pages/News";
 import Ask from "./pages/Ask";
 
 export default function App() {
-  const [stations, setStations] = useStates(() => {
+  const [stations, setStations] = useState(() => {
   const saved = localStorage.getItem("sulitgas-stations");
   return saved ? JSON.parse(saved) : initialStations;
   })
