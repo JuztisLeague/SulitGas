@@ -235,7 +235,7 @@ button{
 }
 
 .gauge-trend{
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .gauge-trend.up{color: var(--bad);}
@@ -245,7 +245,34 @@ button{
 .gauge-grid{
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 100px;
   max-width: 500px;
   margin: 16px auto;
+}
+
+.news-feed{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  margin: 24px auto;
+}  
+.news-card{
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: left;
+}
+.news-tag {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.news-headline {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
 }

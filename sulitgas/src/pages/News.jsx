@@ -1,4 +1,6 @@
 import  Gauge  from "../Gauge";
+import{news} from "../data/news";
+
 
 export default function News() {
   return (
@@ -9,6 +11,16 @@ export default function News() {
         <Gauge label="Gasoline" price={63.2} nextWeekPrice={62.8} />
         <Gauge label="Premium" price={68.9} nextWeekPrice={68.9} />
         <Gauge label="Kerosene" price={52.1} nextWeekPrice={51.95} />
+      </div>
+
+      <div className="news-feed">
+        {news.map((item) => (
+          <div key={item.id} className="news-card">
+            <p className="news-tag">{item.tag}</p>
+            <p className="news-headline">{item.headline}</p>
+          </div>
+
+        ))}
       </div>
     </div>
   );
