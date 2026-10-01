@@ -6,7 +6,6 @@ import Home from "./pages/Home";
 import Report from "./pages/Report";
 import "./App.css";
 import News from "./pages/News";
-import Ask from "./pages/Ask";
 
 export default function App() {
   const [stations, setStations] = useState(() => {
@@ -43,7 +42,6 @@ export default function App() {
       <Route path="/" element={<Home stations = {stations}/>} />
       <Route path = "/news" element={<News />} />
       <Route path = "/report" element={<Report onReport= {handleReport}/>} />
-      <Route path = "/ask" element={<Ask />} />
     </Routes>
     </>
     

@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import {House, PenLine, Newspaper, Send} from "lucide-react";
+import {House, PenLine, Newspaper} from "lucide-react";
 
 export default function NavBar() {
 
@@ -13,9 +13,6 @@ export default function NavBar() {
             </NavLink>
             <NavLink to="/report" className={({isActive}) => (isActive ? "active" : "")}>
             <PenLine size = {20}/>
-            </NavLink>
-            <NavLink to="/ask" className={({isActive}) => (isActive ? "active" : "")}>
-            <Send size = {20}/>
             </NavLink>
         </nav>
     )

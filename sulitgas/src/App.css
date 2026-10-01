@@ -276,3 +276,9 @@ button{
   margin: 0;
   line-height: 1.4;
 }
+
+.news-time {
+    color: var(--text);
+    font-size: 0.75rem;
+    margin: 6px 0 0;
+}
