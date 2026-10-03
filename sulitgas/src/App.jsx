@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
-import {stations as initialStations} from "./data/stations";
+import { supabase } from "./supabaseClient";
 import NavBar from "./NavBar";
 import Home from "./pages/Home";
 import Report from "./pages/Report";
@@ -8,14 +8,19 @@ import "./App.css";
 import News from "./pages/News";
 
 export default function App() {
-  const [stations, setStations] = useState(() => {
-  const saved = localStorage.getItem("sulitgas-stations");
-  return saved ? JSON.parse(saved) : initialStations;
-  })
+  const [stations, setStations] = useState([]);
   
   useEffect(() => {
-    localStorage.setItem("sulitgas-stations", JSON.stringify(stations));
-  }, [stations]);
+    async function fetchStations() {
+      const {data, error} = await supabase.from("stations").select("*");
+      if (error) {
+        console.log("Error fetching stations, error");
+        return;
+      }
+      setStations(data);
+    }
+    fetchStations();
+  }, []);
 
 
   function handleReport(newReport) {
