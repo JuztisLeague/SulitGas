@@ -23,21 +23,35 @@ export default function App() {
   }, []);
 
 
-  function handleReport(newReport) {
-    setStations((prevStations) => {
-      const existingIndex = prevStations.findIndex(
-        (station) => station.name.toLowerCase() === newReport.name.toLowerCase()
-      );
+  async function handleReport(newReport) {
+    const existing = stations.find (
+      (station) => station.name.toLowerCase() === newReport.name.toLowerCase()
+    );
 
-      if (existingIndex !== -1) {
-        const updated = [...prevStations];
-        updated[existingIndex] = {...updated[existingIndex],
-          [newReport.fuelType]: newReport.price,
-        };
-        return updated;
-      }
-      return prevStations;
-    });
+    if (!existing) return;
+
+    const now = new Date().toISOString();
+
+    const{error} = await supabase
+    .from("stations")
+    .update({
+      [newReport.fuelType]: newReport.price,
+      reportedAt: now,
+    })
+
+    .eq("id", existing.id);
+
+    if (error) {
+      console.log("Error updating station:", error);
+    }
+
+    setStations((prevStations) => 
+      prevStations.map((station) => 
+      station.id === existing.id
+    ? { ...station, [newReport.fuelType]: newReport.price, reportedAt: now}
+    :station
+      )
+  );
   }
   
   return (
