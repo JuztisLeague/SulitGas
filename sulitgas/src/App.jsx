@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
 import { supabase } from "./supabaseClient";
-import { importOsmStations } from "./utils/fetchOsmStations";
 import NavBar from "./NavBar";
 import Home from "./pages/Home";
 import Report from "./pages/Report";

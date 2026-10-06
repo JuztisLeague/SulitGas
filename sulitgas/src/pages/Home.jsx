@@ -1,6 +1,15 @@
 import {useState} from "react";
 import FuelToggle from "../FuelToggle";
 import StationList from "../StationList"
+import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
+import L from "leaflet";
+
+const stationIcon = new L.Icon({
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
 
 export default function Home({stations}) {
 
@@ -28,6 +37,33 @@ export default function Home({stations}) {
   return (
     <div className="app-title">
     <h1>SulitGas Watch</h1>
+
+    <MapContainer 
+    center={[10.3157, 123.9054]} 
+    zoom={12}
+    style={{height: "300px", borderRadius:"12px"}}>
+      <TileLayer 
+        url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; OpenStreetMap contributors'/>
+
+      {stations.map((station) => (
+        <Marker key = {station.id} position={[station.lat, station.lng]} icon={stationIcon}>
+          <Popup>{station.name}</Popup>
+        </Marker>
+      ))}
+
+
+
+
+
+    </MapContainer>
+
+
+
+
+
+
+
       <div className="search-bar">
         <input 
         type="text"
