@@ -1,7 +1,7 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import FuelToggle from "../FuelToggle";
 import StationList from "../StationList"
-import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
+import {MapContainer, TileLayer, Marker, Popup, useMap} from "react-leaflet";
 import L from "leaflet";
 
 const stationIcon = new L.Icon({
@@ -11,12 +11,25 @@ const stationIcon = new L.Icon({
   iconAnchor: [12, 41],
 });
 
+function FlyToStation({ station }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (station) {
+      map.flyTo([station.lat, station.lng], 15);
+    }
+  }, [station, map]);
+
+  return null;
+}
+
 export default function Home({stations}) {
 
   const [fuel, setFuel] = useState("diesel");
   const [searchTerm, setSearchTerm] = useState("");
   const [userLocation, setUserLocation] = useState(null);
   const [locationError, setLocationError] = useState("");
+  const [selectedStation, setSelectedStation] = useState(null);
 
   function handleNearMe() {
     navigator.geolocation.getCurrentPosition(
@@ -46,23 +59,13 @@ export default function Home({stations}) {
         url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; OpenStreetMap contributors'/>
 
+      <FlyToStation station = {selectedStation} />
       {stations.map((station) => (
         <Marker key = {station.id} position={[station.lat, station.lng]} icon={stationIcon}>
           <Popup>{station.name}</Popup>
         </Marker>
       ))}
-
-
-
-
-
     </MapContainer>
-
-
-
-
-
-
 
       <div className="search-bar">
         <input 
@@ -77,7 +80,7 @@ export default function Home({stations}) {
 
     {locationError && <p style={{color: "var(--bad)"}}>{locationError}</p>}
     <FuelToggle fuel={fuel} setFuel={setFuel} />
-    <StationList stations = {stations} fuel = {fuel} searchTerm = {searchTerm} userLocation={userLocation}/>
+    <StationList stations = {stations} fuel = {fuel} searchTerm = {searchTerm} userLocation={userLocation} onSelectStation={setSelectedStation}/>
     </div>
   );
 }

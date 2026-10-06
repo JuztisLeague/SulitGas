@@ -61,7 +61,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home stations = {stations}/>} />
       <Route path = "/news" element={<News />} />
-      <Route path = "/report" element={<Report onReport= {handleReport}/>} />
+      <Route path = "/report/:stationId" element={<Report stations={stations} onReport= {handleReport}/>} />
     </Routes>
     </>
     
