@@ -1,8 +1,7 @@
 import {useState} from "react";
 
-export default function ReportForm({onReport}) {
+export default function ReportForm({station, onReport}) {
 
-const [stationName, setStationName] = useState("");
 const [fuelType, setFuelType] = useState("diesel");
 const [price, setPrice] = useState("");
 
@@ -10,28 +9,17 @@ function handleSubmit(e) {
     e.preventDefault();
 
     onReport({
-       name: stationName,
+       name: station.name,
        fuelType: fuelType,
        price: Number(price) 
     })
 
-    setStationName("");
     setFuelType("diesel");
     setPrice("");
 }
 
 return (
     <form className="report-form" onSubmit={handleSubmit}>
-
-        <label className="form-label">
-            Station Name
-             <input 
-                type = "text"
-                placeholder = "e.g. Caltex Pilipog Cordova"
-                value={stationName}
-                onChange={(e) => setStationName(e.target.value)}
-                className="form-input"/>
-        </label>
 
         
         <label className="form-label">
