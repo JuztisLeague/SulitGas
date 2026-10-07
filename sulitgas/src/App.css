@@ -293,3 +293,48 @@ button{
   font-size: 0.85rem;
   margin-top: 10px;
 }
+
+.report-mode-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 380px;
+  margin: 36px auto;
+}
+
+.mode-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mode-card-highlight {
+  border: 1px solid rgba(245, 166, 35, 0.3);
+}
+
+.mode-icon {
+  font-size: 30px;
+  width: 44px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mode-title {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.mode-desc {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: 3px;
+}
