@@ -6,6 +6,7 @@ import {supabase} from "../supabaseClient";
 
 export default function Report({stations, onReport}) {
   const [mode, setMode] = useState(null);
+  const [photo, setPhoto] = useState(null);
   const {stationId} = useParams();
   const station = stations.find((s) => String(s.id) === stationId);
 
@@ -48,7 +49,23 @@ export default function Report({stations, onReport}) {
   </div>
 )}
       {mode === "manual" && <ReportForm station={station} onReport={onReport} />}
-      {mode === "photo"  && <button onClick={testFunction}>Test function</button>}
+      {mode === "photo"  && (
+        <div className="photo-upload">
+          <input
+          type="file"
+          accept="image/*"
+          capture="environment"
+          onChange = {(e) => setPhoto(e.target.files[0])}/>
+          {photo && <p>Selected: {photo.name}</p>}
+           {photo && (
+      <img
+        src={URL.createObjectURL(photo)}
+        alt="Price board preview"
+        style={{ maxWidth: "100%", borderRadius: "12px", marginTop: "12px" }}
+      />
+    )}
+        </div>
+      )}
     </div>
   );
 }
