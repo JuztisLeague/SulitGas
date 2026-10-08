@@ -1,7 +1,8 @@
 import {useState} from "react";
 import { useParams } from "react-router-dom";
 import ReportForm from "../ReportForm";
-import {PenLine, Camera, Pen} from "lucide-react";
+import {PenLine, Camera} from "lucide-react";
+import {supabase} from "../supabaseClient";
 
 export default function Report({stations, onReport}) {
   const [mode, setMode] = useState(null);
@@ -15,6 +16,13 @@ export default function Report({stations, onReport}) {
       </div>
     )
   }
+
+  async function testFunction() {
+  const { data, error } = await supabase.functions.invoke("scan-price");
+  console.log("Function data:", data);
+  console.log("Function error:", error);
+}
+
 
   return (
     <div className="report-page">
@@ -40,7 +48,7 @@ export default function Report({stations, onReport}) {
   </div>
 )}
       {mode === "manual" && <ReportForm station={station} onReport={onReport} />}
-      {mode === "photo"  && <p style={{color: "var()--text-muted", textAlign: "center"}}>Photo scanning coming soon</p>}
+      {mode === "photo"  && <button onClick={testFunction}>Test function</button>}
     </div>
   );
 }
