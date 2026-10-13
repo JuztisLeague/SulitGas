@@ -5,8 +5,8 @@ export default function FuelToggle({ fuel, setFuel }) {
       <button onClick={() => setFuel("diesel")}
         style = {{ 
           fontWeight: fuel === "diesel" ? "bold" : "normal",
-          background: fuel === "diesel" ? "#FFA500" : "#04634F",
-          color: fuel === "diesel" ? "#04634F" : "#FFFFFF"
+          background: fuel === "diesel" ? "#F5DEB3" : "#003262",
+          color: fuel === "diesel" ? "#003262" : "#FFFFFF"
         }}
         >
           Diesel
@@ -15,8 +15,8 @@ export default function FuelToggle({ fuel, setFuel }) {
       <button onClick={() => setFuel("gasoline")}
         style = {{ 
           fontWeight: fuel === "gasoline" ? "bold" : "normal",
-          background: fuel === "gasoline" ? "#FFA500" : "#04634F",
-          color: fuel === "gasoline" ? "#04634F" : "#FFFFFF"
+          background: fuel === "gasoline" ? "#F5DEB3" : "#003262",
+          color: fuel === "gasoline" ? "#003262" : "#FFFFFF"
         }}
         >
           Gasoline
@@ -24,8 +24,8 @@ export default function FuelToggle({ fuel, setFuel }) {
       <button onClick={() => setFuel("premium")}
         style = {{ 
           fontWeight: fuel === "premium" ? "bold" : "normal",
-          background: fuel === "premium" ? "#FFA500" : "#04634F",
-          color: fuel === "premium" ? "#04634F" : "#FFFFFF"
+          background: fuel === "premium" ? "#F5DEB3" : "#003262",
+          color: fuel === "premium" ? "#003262" : "#FFFFFF"
         }}
         >
           Premium
@@ -33,8 +33,8 @@ export default function FuelToggle({ fuel, setFuel }) {
       <button onClick={() => setFuel("kerosene")}
         style = {{ 
           fontWeight: fuel === "kerosene" ? "bold" : "normal",
-          background: fuel === "kerosene" ? "#FFA500" : "#04634F",
-          color: fuel === "kerosene" ? "#04634F" : "#FFFFFF"
+          background: fuel === "kerosene" ? "#F5DEB3" : "#003262",
+          color: fuel === "kerosene" ? "#003262" : "#FFFFFF"
         }}
         >
           Kerosene

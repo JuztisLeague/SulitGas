@@ -1,11 +1,10 @@
 :root {
-
-  --bg: #04634F;
-  --card-bg: #112B1C;
+  --bg: #F5DEB3;
+  --card-bg: #003262;
   --accent: #F5A623;
   --good: #4CAF6D;
   --bad: #D9534F;
-  --text: #DB7107;
+  --text: #FFD700;
   --text-muted: #9AA39C;
 }
 #root{
@@ -13,7 +12,9 @@
 }
 .app-title{
   border: none;
+  color: var(--card-bg);
 }
+
 body{
   background: var(--bg);
   color: var(--text);
@@ -223,13 +224,13 @@ button{
 }
 
 .gauge-price{
-  color: var(-text);
+  color: var(--card-bg);
   font-weight: 700;
   font-size: 0.95rem;
 }
 
 .gauge-label {
-  color: var(--text-muted);
+  color: var(--card-bg);
   font-size: 0.85rem;
   margin: 8px 0 2px;
 }
@@ -297,10 +298,11 @@ button{
   color: #1A1A1A;
   font-weight: 700;
   text-decoration: none;
-  padding: 6px 14px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 50px;
   font-size: 0.85rem;
-  margin-top: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 
 .report-mode-choice {

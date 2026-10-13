@@ -48,8 +48,8 @@ export default function Home({stations}) {
   }
   
   return (
-    <div className="app-title">
-    <h1>SulitGas Watch</h1>
+    <div>
+    <h1 className="app-title">SulitGas Watch</h1>
 
     <MapContainer 
     center={[10.3157, 123.9054]} 
