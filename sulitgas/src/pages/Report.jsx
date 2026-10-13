@@ -4,6 +4,16 @@ import ReportForm from "../ReportForm";
 import {PenLine, Camera} from "lucide-react";
 import {supabase} from "../supabaseClient";
 
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function Report({stations, onReport}) {
   const [mode, setMode] = useState(null);
   const [photo, setPhoto] = useState(null);
@@ -18,8 +28,11 @@ export default function Report({stations, onReport}) {
     )
   }
 
-  async function testFunction() {
-  const { data, error } = await supabase.functions.invoke("scan-price");
+ async function handleScan() {
+  const base64 = await fileToBase64(photo);
+  const { data, error } = await supabase.functions.invoke("scan-price", {
+    body: { image: base64 },
+  });
   console.log("Function data:", data);
   console.log("Function error:", error);
 }
@@ -64,6 +77,7 @@ export default function Report({stations, onReport}) {
         style={{ maxWidth: "100%", borderRadius: "12px", marginTop: "12px" }}
       />
     )}
+        {photo && <button onClick={handleScan}>Read price</button>}
         </div>
       )}
     </div>

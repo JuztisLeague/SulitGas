@@ -250,6 +250,15 @@ button{
   margin: 16px auto;
 }
 
+@media (max-width: 600px) {
+  .gauge-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-items: center;
+  }
+}
+
 .news-feed{
   display:flex;
   flex-direction: column;
