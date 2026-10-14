@@ -17,6 +17,8 @@ function fileToBase64(file) {
 export default function Report({stations, onReport}) {
   const [mode, setMode] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [results, setResults] = useState([]);
+  const [scanMessage, setScanMessage] = useState("");
   const {stationId} = useParams();
   const station = stations.find((s) => String(s.id) === stationId);
 
@@ -29,14 +31,31 @@ export default function Report({stations, onReport}) {
   }
 
  async function handleScan() {
+  setScanMessage("Reading the photo...");
+  setResults([]);
+
   const base64 = await fileToBase64(photo);
   const { data, error } = await supabase.functions.invoke("scan-price", {
-    body: { image: base64 },
+    body: { image: base64, mimeType: photo.type },
   });
-  console.log("Function data:", data);
-  console.log("Function error:", error);
-}
 
+  if (error || !data || data.error) {
+    setScanMessage("The AI is busy right now. Try again in a minute, or type the price in.");
+    return;
+  }
+
+  try {
+    const parsed = JSON.parse(data.text);
+    if (parsed.length === 0) {
+      setScanMessage("Couldn't read the prices clearly. Try a closer, sharper photo.");
+      return;
+    }
+    setResults(parsed);
+    setScanMessage("");
+  } catch {
+    setScanMessage("Couldn't understand the AI's answer. Try again.");
+  }
+}
 
   return (
     <div className="report-page">
@@ -78,8 +97,17 @@ export default function Report({stations, onReport}) {
       />
     )}
         {photo && <button onClick={handleScan}>Read price</button>}
-        </div>
-      )}
+        {scanMessage && <p>{scanMessage}</p>}
+
+          {results.length > 0 && (
+            <ul>
+              {results.map((r) => (
+                <li key={r.fuel}>{r.fuel}: ₱{r.price}</li>
+              ))}
+            </ul>
+          )}
+                  </div>
+              )}
     </div>
   );
 }

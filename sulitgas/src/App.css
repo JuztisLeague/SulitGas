@@ -89,6 +89,12 @@ font-size: 1.1rem;
   font-size: 0.8rem;
 }
 
+.station-address {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
 .search-bar{
   display: flex;
   gap: 8px;
@@ -156,6 +162,7 @@ button{
 
 .report-page{
   text-align: center;
+  color: var(--card-bg);
 }
 
 

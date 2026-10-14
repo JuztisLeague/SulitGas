@@ -49,6 +49,11 @@ export default function StationList({ stations, fuel, searchTerm, userLocation, 
         return (
           <li key={station.id} className="station-card" onClick={() => onSelectStation(station)}>
             <div className="station-name">{station.name}</div>
+            <div className="station-address">
+              {[station.road, station.barangay && `Brgy. ${station.barangay}`, station.city]
+                .filter(Boolean)
+                .join(", ")}
+            </div>
             <div className="station-distance">{displayDistance} km away</div>
             <div className="station-price">₱{station[fuel]}</div>
             <span className={`station-tag ${isAboveBrand ? "bad" : "good"}`}>
