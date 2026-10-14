@@ -9,6 +9,7 @@ function handleSubmit(e) {
     e.preventDefault();
 
     onReport({
+        id: station.id,
        name: station.name,
        fuelType: fuelType,
        price: Number(price) 

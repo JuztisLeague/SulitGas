@@ -27,7 +27,7 @@ export default function App() {
 
   async function handleReport(newReport) {
     const existing = stations.find (
-      (station) => station.name.toLowerCase() === newReport.name.toLowerCase()
+       (station) => station.id === newReport.id
     );
 
     if (!existing) return;
