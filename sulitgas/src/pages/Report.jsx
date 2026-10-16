@@ -38,6 +38,7 @@ export default function Report({stations, onReport}) {
   const { data, error } = await supabase.functions.invoke("scan-price", {
     body: { image: base64, mimeType: photo.type },
   });
+    console.log("Scan result:", data, error);
 
   if (error || !data || data.error) {
     setScanMessage("The AI is busy right now. Try again in a minute, or type the price in.");
@@ -56,6 +57,12 @@ export default function Report({stations, onReport}) {
     setScanMessage("Couldn't understand the AI's answer. Try again.");
   }
 }
+
+ function updatePrice(index, newPrice){
+    setResults((prev)  => 
+      prev.map((r, i) => (i === index ? {...r, price: newPrice} : r))
+  );
+  }
 
   return (
     <div className="report-page">
@@ -88,6 +95,15 @@ export default function Report({stations, onReport}) {
           accept="image/*"
           capture="environment"
           onChange = {(e) => setPhoto(e.target.files[0])}/>
+          <button 
+            onClick={() =>
+              setResults([
+                { fuel: "diesel", price: 58.45 },
+                { fuel: "gasoline", price: 63.2 },
+                { fuel: "premium", price: 65.3 },
+              ])
+            }> Fake Scan
+          </button>
           {photo && <p>Selected: {photo.name}</p>}
            {photo && (
       <img
@@ -100,12 +116,21 @@ export default function Report({stations, onReport}) {
         {scanMessage && <p>{scanMessage}</p>}
 
           {results.length > 0 && (
-            <ul>
-              {results.map((r) => (
-                <li key={r.fuel}>{r.fuel}: ₱{r.price}</li>
-              ))}
-            </ul>
-          )}
+                    <div>
+                      {results.map((r, index) => (
+                        <label key={r.fuel} className="form-label">
+                          {r.fuel}
+                          <input
+                            type="number"
+                            step="0.01"
+                            value={r.price}
+                            onChange={(e) => updatePrice(index, e.target.value)}
+                            className="form-input"
+                          />
+                        </label>
+                      ))}
+                    </div>
+                  )}
                   </div>
               )}
     </div>
