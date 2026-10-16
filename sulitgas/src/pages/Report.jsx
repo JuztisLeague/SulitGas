@@ -1,7 +1,7 @@
-import {useState} from "react";
+import {useState, useRef} from "react";
 import { useParams } from "react-router-dom";
 import ReportForm from "../ReportForm";
-import {PenLine, Camera} from "lucide-react";
+import {PenLine, Camera, Image as ImageIcon} from "lucide-react";
 import {supabase} from "../supabaseClient";
 
 
@@ -21,6 +21,14 @@ export default function Report({stations, onReport}) {
   const [scanMessage, setScanMessage] = useState("");
   const {stationId} = useParams();
   const station = stations.find((s) => String(s.id) === stationId);
+  const [showMenu, setShowMenu] = useState(false);
+  const cameraRef = useRef(null);
+  const galleryRef = useRef(null);
+
+  function handlePick(e) {
+    const file = e.target.files[0];
+    if (file) setPhoto(file);
+  }
 
   if (!station) {
     return (
@@ -106,12 +114,38 @@ export default function Report({stations, onReport}) {
       {mode === "manual" && <ReportForm station={station} onReport={onReport} />}
       {mode === "photo"  && (
         <div className="photo-upload">
-          <input
-          type="file"
-          accept="image/*"
-          capture="environment"
-          onChange = {(e) => setPhoto(e.target.files[0])}/>
           
+          <button type="button" className="photo-drop" onClick={() => setShowMenu(true)}>
+              <span className="photo-drop-icon"><Camera size={28} /></span>
+              <span className="photo-drop-title">Tap to add a photo</span>
+              <span className="photo-drop-sub">Take one now or choose from your gallery</span>
+            </button>
+
+            {showMenu && (
+              <div className="photo-menu">
+                <button type="button" onClick={() => { cameraRef.current.click(); setShowMenu(false); }}>
+                  <Camera size={18} /> Take a photo
+                </button>
+                <button type="button" onClick={() => { galleryRef.current.click(); setShowMenu(false); }}>
+                  <ImageIcon size={18} /> Choose from gallery
+                </button>
+                <button type="button" className="photo-menu-cancel" onClick={() => setShowMenu(false)}>
+                  Cancel
+                </button>
+              </div>
+            )}
+
+            <input ref={cameraRef} type="file" accept="image/*" capture="environment" hidden onChange={handlePick} />
+            <input ref={galleryRef} type="file" accept="image/*" hidden onChange={handlePick} />
+            {!photo && (
+              <div className="photo-tips">
+                <p className="photo-tips-title">Note before taking a picture</p>
+                <p>1. Fill the frame with the price board.</p>
+                <p>2. Avoid glare and shadows.</p>
+                <p>3. Hold steady so the digits are sharp.</p>
+              </div>
+            )}
+
           {photo && <p>Selected: {photo.name}</p>}
            {photo && (
       <img
@@ -124,22 +158,31 @@ export default function Report({stations, onReport}) {
         {scanMessage && <p>{scanMessage}</p>}
 
           {results.length > 0 && (
-                    <div>
-                      {results.map((r, index) => (
-                        <label key={r.fuel} className="form-label">
-                          {r.fuel}
-                          <input
-                            type="number"
-                            step="0.01"
-                            value={r.price}
-                            onChange={(e) => updatePrice(index, e.target.value)}
-                            className="form-input"
-                          />
-                        </label>
-                      ))}
-                      <button onClick={submitScanned}>Submit these prices</button>
-                    </div>
-                  )}
+                      <div className="scan-results">
+                        <p className="scan-note">Found {results.length} prices. Fix any that are wrong.</p>
+                        {results.map((r, index) => (
+                          <label key={r.fuel} className="price-row">
+                            <span className="price-row-fuel">{r.fuel}</span>
+                            <span className="price-row-field">
+                              ₱
+                              <input
+                                type="number"
+                                step="0.01"
+                                value={r.price}
+                                onChange={(e) => updatePrice(index, e.target.value)}
+                              />
+                            </span>
+                          </label>
+                        ))}
+                        <button className="submit-scan" onClick={submitScanned}>Submit these prices</button>
+                        <button
+                          className="scan-again"
+                          onClick={() => { setPhoto(null); setResults([]); setScanMessage(""); }}
+                        >
+                          Choose another photo
+                        </button>
+                      </div>
+                    )}
                   </div>
               )}
     </div>
