@@ -38,8 +38,7 @@ export default function Report({stations, onReport}) {
   const { data, error } = await supabase.functions.invoke("scan-price", {
     body: { image: base64, mimeType: photo.type },
   });
-    console.log("Scan result:", data, error);
-
+   
   if (error || !data || data.error) {
     setScanMessage("The AI is busy right now. Try again in a minute, or type the price in.");
     return;
@@ -63,6 +62,23 @@ export default function Report({stations, onReport}) {
       prev.map((r, i) => (i === index ? {...r, price: newPrice} : r))
   );
   }
+
+  async function submitScanned() {
+  for (const r of results) {
+    const price = Number(r.price);
+    if (!(price > 0)) continue;
+
+    await onReport({
+      id: station.id,
+      name: station.name,
+      fuelType: r.fuel,
+      price: price,
+    });
+  }
+
+  setResults([]);
+  setScanMessage("Thanks! Prices submitted.");
+}
 
   return (
     <div className="report-page">
@@ -95,15 +111,7 @@ export default function Report({stations, onReport}) {
           accept="image/*"
           capture="environment"
           onChange = {(e) => setPhoto(e.target.files[0])}/>
-          <button 
-            onClick={() =>
-              setResults([
-                { fuel: "diesel", price: 58.45 },
-                { fuel: "gasoline", price: 63.2 },
-                { fuel: "premium", price: 65.3 },
-              ])
-            }> Fake Scan
-          </button>
+          
           {photo && <p>Selected: {photo.name}</p>}
            {photo && (
       <img
@@ -129,6 +137,7 @@ export default function Report({stations, onReport}) {
                           />
                         </label>
                       ))}
+                      <button onClick={submitScanned}>Submit these prices</button>
                     </div>
                   )}
                   </div>
