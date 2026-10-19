@@ -155,8 +155,9 @@ button{
 }
 
 
-.report-page{
-  text-align: center;
+.report-page {
+  min-height: 100vh;
+  background: var(--bg);
   color: var(--card-bg);
 }
 
@@ -919,5 +920,455 @@ button{
   cursor: pointer;
 }
 
+@media (min-width: 769px) {
+   .report-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 40px 48px;
+    box-sizing: border-box;
+    color: var(--card-bg);
+    text-align: left;
+  }
+
+  .report-page > .app-title {
+    color: var(--card-bg);
+    text-align: center;
+    margin: 0 0 8px;
+    font-size: 2rem;
+  }
+
+  .report-page > p {
+    margin: 0 0 28px;
+  }
+
+   .report-mode-choice {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    max-width: none;
+    margin: 0 0 24px;
+  }
+
+  .report-mode-choice .mode-card {
+    min-height: 160px;
+    padding: 28px;
+    border-radius: 16px;
+    box-sizing: border-box;
+  }
+
+  .report-mode-choice .mode-icon {
+    color: var(--accent);
+    width: 48px;
+    font-size: 30px;
+  }
+
+  .report-mode-choice .mode-title {
+    font-size: 1.15rem;
+  }
+
+  .report-mode-choice .mode-desc {
+    line-height: 1.5;
+  }
+
+  .photo-upload {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+    align-items: start;
+    gap: 24px;
+  }
+
+  .photo-upload .photo-drop {
+    width: 100%;
+    max-width: none;
+    min-height: 260px;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .photo-upload .photo-tips {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .photo-upload > img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    grid-column: 1;
+  }
+
+  .photo-upload > .scan-results {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    grid-column: 1 / -1;
+  }
+}
 
 
+/* Header */
+.report-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px clamp(28px, 5vw, 72px);
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.report-header h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(30px, 3vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.report-header p {
+  margin: 8px 0 0;
+  color: #d8e0e9;
+  font-size: 15px;
+}
+
+.report-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  border-radius: 18px;
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--text);
+}
+
+/* Main content */
+.report-content {
+  width: min(100% - 64px, 1080px);
+  margin: 0 auto;
+  padding: 36px 0 64px;
+}
+
+/* Station information */
+.report-station {
+  padding: 24px 28px;
+  border: 1px solid rgba(0, 50, 98, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 6px 20px rgba(0, 50, 98, 0.05);
+}
+
+.report-station-eyebrow {
+  margin: 0 0 8px;
+  color: #687887;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.report-station h2 {
+  margin: 0;
+  color: var(--card-bg);
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.report-station-address {
+  margin: 8px 0 0;
+  color: #687887;
+  font-size: 14px;
+}
+
+/* Choose reporting method */
+.report-method-section {
+  margin-top: 38px;
+}
+
+.report-section-heading {
+  margin-bottom: 20px;
+}
+
+.report-section-heading h2 {
+  margin: 0;
+  color: var(--card-bg);
+  font-size: clamp(23px, 2.2vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.report-section-heading p {
+  margin: 8px 0 0;
+  color: #687887;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.report-method-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* Method cards */
+.report-method-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 230px;
+  padding: 26px;
+  border: 2px solid rgba(0, 50, 98, 0.12);
+  border-radius: 18px;
+  background: #fffdf7;
+  color: var(--card-bg);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 50, 98, 0.06);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.report-method-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 14px 28px rgba(0, 50, 98, 0.12);
+}
+
+.report-method-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.report-method-featured {
+  border-color: var(--accent);
+  background: #fffaf0;
+}
+
+.report-method-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  background: rgba(245, 166, 35, 0.16);
+  color: #8b5700;
+}
+
+.report-method-title {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--card-bg);
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.report-method-desc {
+  display: block;
+  max-width: 360px;
+  color: #687887;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.report-method-action {
+  display: inline-block;
+  margin-top: auto;
+  padding-top: 22px;
+  color: #8b5700;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* Photo upload area */
+.photo-upload {
+  max-width: 760px;
+  margin: 32px auto 0;
+}
+
+.photo-drop {
+  width: 100%;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px;
+  border: 2px dashed rgba(0, 50, 98, 0.28);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--card-bg);
+  text-align: center;
+  cursor: pointer;
+}
+
+.photo-drop:hover {
+  border-color: var(--accent);
+  background: #fffaf0;
+}
+
+.photo-drop-icon {
+  color: #8b5700;
+}
+
+.photo-drop-title {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.photo-drop-sub {
+  color: #687887;
+  font-size: 14px;
+}
+
+.photo-tips,
+.scan-results {
+  margin-top: 20px;
+  padding: 22px;
+  border: 1px solid rgba(0, 50, 98, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.photo-tips p {
+  margin: 8px 0;
+  color: #526475;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.photo-tips .photo-tips-title {
+  margin-top: 0;
+  color: var(--card-bg);
+  font-weight: 800;
+}
+
+.photo-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid rgba(0, 50, 98, 0.12);
+  border-radius: 14px;
+  background: #fffdf7;
+  box-shadow: 0 8px 22px rgba(0, 50, 98, 0.08);
+}
+
+.photo-menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--card-bg);
+  text-align: left;
+  cursor: pointer;
+}
+
+.photo-menu button:hover {
+  background: rgba(245, 166, 35, 0.14);
+}
+
+.photo-menu .photo-menu-cancel {
+  justify-content: center;
+  color: #687887;
+}
+
+.scan-note {
+  margin-top: 0;
+  color: #526475;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0, 50, 98, 0.1);
+}
+
+.price-row-fuel {
+  color: var(--card-bg);
+  font-weight: 700;
+}
+
+.price-row-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--card-bg);
+  font-weight: 800;
+}
+
+.price-row-field input {
+  width: 130px;
+  padding: 10px 12px;
+  border: 1px solid rgba(0, 50, 98, 0.2);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--card-bg);
+}
+
+.submit-scan,
+.scan-again {
+  margin: 16px 10px 0 0;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.submit-scan {
+  background: var(--card-bg);
+  color: #fff;
+}
+
+.scan-again {
+  border: 1px solid rgba(0, 50, 98, 0.2);
+  background: transparent;
+  color: var(--card-bg);
+}
+
+/* Keep the layout comfortable on narrower laptop windows */
+@media (max-width: 760px) {
+  .report-content {
+    width: calc(100% - 32px);
+    padding-top: 24px;
+  }
+
+  .report-header {
+    padding: 22px 20px;
+  }
+
+  .report-header-icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .report-method-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .report-method-card {
+    min-height: 200px;
+  }
+}
