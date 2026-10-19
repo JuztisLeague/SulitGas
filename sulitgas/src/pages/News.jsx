@@ -1,8 +1,12 @@
 import  Gauge  from "../Gauge";
 import{news} from "../data/news";
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function News() {
+  const navigate = useNavigate();
+
   function timeAgo(isoString) {
     const minutes = Math.floor((Date.now() - new Date(isoString)) / 60000);
     const hours = Math.floor(minutes / 60);
@@ -15,7 +19,14 @@ export default function News() {
 
 
   return (
-    <div>
+    <div className="news-page">
+    <button
+      className="back-home-button"
+      onClick={() => navigate("/")}
+    >
+      ← Back to Homepage
+    </button>
+    
       <h1 className="app-title">Gas News</h1>
       <div className = "gauge-grid">
         <Gauge label="Diesel" price={58.45} nextWeekPrice={60.55} />

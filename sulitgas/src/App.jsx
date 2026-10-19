@@ -58,7 +58,6 @@ export default function App() {
   
   return (
     <>
-    <NavBar />
     <Routes>
       <Route path="/" element={<Home stations = {stations}/>} />
       <Route path = "/news" element={<News />} />
