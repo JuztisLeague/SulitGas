@@ -160,151 +160,165 @@ return (
         <ReportForm station={station} onReport={onReport} />
       )}
 
-      {mode === "photo" && (
-        <div className="photo-upload">
-          <button
-            type="button"
-            className="photo-drop"
-            onClick={() => setShowMenu(true)}
-          >
-            <span className="photo-drop-icon">
-              <Camera size={28} />
-            </span>
-            <span className="photo-drop-title">Add a photo</span>
-            <span className="photo-drop-sub">
-              Take a photo or choose one from your gallery.
-            </span>
-          </button>
-
-          {showMenu && (
-            <div className="photo-menu">
+     
+        {mode === "photo" && (
+          <div className="photo-upload">
+            
+            <section className="photo-upload-panel">
               <button
                 type="button"
-                onClick={() => {
-                  cameraRef.current?.click();
-                  setShowMenu(false);
-                }}
+                className="photo-drop"
+                onClick={() => setShowMenu(true)}
               >
-                <Camera size={18} /> Take a photo
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  galleryRef.current?.click();
-                  setShowMenu(false);
-                }}
-              >
-                <ImageIcon size={18} /> Choose from gallery
-              </button>
-              <button
-                type="button"
-                className="photo-menu-cancel"
-                onClick={() => setShowMenu(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          )}
-
-          <input
-            ref={cameraRef}
-            type="file"
-            accept="image/*"
-            capture="environment"
-            hidden
-            onChange={handlePick}
-          />
-          <input
-            ref={galleryRef}
-            type="file"
-            accept="image/*"
-            hidden
-            onChange={handlePick}
-          />
-
-          {!photo && (
-            <div className="photo-tips">
-              <p className="photo-tips-title">Tips for a clear photo</p>
-              <p>1. Fill the frame with the price board.</p>
-              <p>2. Avoid glare and shadows.</p>
-              <p>3. Hold steady so the digits are sharp.</p>
-            </div>
-          )}
-
-          {photo && <p>Selected: {photo.name}</p>}
-
-          {photo && (
-            <img
-              src={URL.createObjectURL(photo)}
-              alt="Price board preview"
-              style={{
-                maxWidth: "100%",
-                maxHeight: "360px",
-                objectFit: "contain",
-                borderRadius: "12px",
-                marginTop: "12px",
-              }}
-            />
-          )}
-
-          {photo && (
-            <button
-              type="button"
-              className="submit-scan"
-              onClick={handleScan}
-            >
-              Read prices
-            </button>
-          )}
-
-          {scanMessage && <p className="scan-message">{scanMessage}</p>}
-
-          {results.length > 0 && (
-            <div className="scan-results">
-              <p className="scan-note">
-                Found {results.length} prices. Check and correct them.
-              </p>
-
-              {results.map((r, index) => (
-                <label key={r.fuel} className="price-row">
-                  <span className="price-row-fuel">{r.fuel}</span>
-                  <span className="price-row-field">
-                    ₱
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={r.price}
-                      onChange={(e) =>
-                        updatePrice(index, e.target.value)
-                      }
-                    />
-                  </span>
-                </label>
-              ))}
-
-              <button
-                type="button"
-                className="submit-scan"
-                onClick={submitScanned}
-              >
-                Submit these prices
+                <span className="photo-drop-icon">
+                  <Camera size={28} />
+                </span>
+                <span className="photo-drop-title">Add a photo</span>
+                <span className="photo-drop-sub">
+                  Take a photo or choose one from your gallery.
+                </span>
               </button>
 
-              <button
-                type="button"
-                className="scan-again"
-                onClick={() => {
-                  setPhoto(null);
-                  setResults([]);
-                  setScanMessage("");
-                }}
-              >
-                Choose another photo
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+              {showMenu && (
+                <div className="photo-menu">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      cameraRef.current?.click();
+                      setShowMenu(false);
+                    }}
+                  >
+                    <Camera size={18} /> Take a photo
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      galleryRef.current?.click();
+                      setShowMenu(false);
+                    }}
+                  >
+                    <ImageIcon size={18} /> Choose from gallery
+                  </button>
+
+                  <button
+                    type="button"
+                    className="photo-menu-cancel"
+                    onClick={() => setShowMenu(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+
+              <input
+                ref={cameraRef}
+                type="file"
+                accept="image/*"
+                capture="environment"
+                hidden
+                onChange={handlePick}
+              />
+
+              <input
+                ref={galleryRef}
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={handlePick}
+              />
+
+              <div className="photo-tips">
+                <p className="photo-tips-title">Tips for a clear photo</p>
+                <p>1. Fill the frame with the price board.</p>
+                <p>2. Avoid glare and shadows.</p>
+                <p>3. Hold steady so the digits are sharp.</p>
+              </div>
+            </section>
+
+
+            <section className="photo-preview-panel">
+              {photo ? (
+                <>
+                  <p className="photo-preview-title">
+                    Selected: {photo.name}
+                  </p>
+
+                  <img
+                    className="photo-preview-image"
+                    src={URL.createObjectURL(photo)}
+                    alt="Price board preview"
+                  />
+
+                  <button
+                    type="button"
+                    className="submit-scan"
+                    onClick={handleScan}
+                    disabled={scanMessage === "Reading the photo..."}
+                  >
+                    {scanMessage === "Reading the photo..."
+                      ? "Reading photo..."
+                      : "Read prices"}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="scan-again"
+                    onClick={() => {
+                      setPhoto(null);
+                      setResults([]);
+                      setScanMessage("");
+                    }}
+                  >
+                    Choose another photo
+                  </button>
+                </>
+              ) : (
+                <div className="photo-preview-empty">
+                  Your selected photo will appear here.
+                </div>
+              )}
+
+              {scanMessage && (
+                <p className="scan-message">{scanMessage}</p>
+              )}
+
+              {results.length > 0 && (
+                <div className="scan-results">
+                  <p className="scan-note">
+                    Found {results.length} prices. Check and correct them.
+                  </p>
+
+                  {results.map((r, index) => (
+                    <label key={r.fuel} className="price-row">
+                      <span className="price-row-fuel">{r.fuel}</span>
+
+                      <span className="price-row-field">
+                        ₱
+                        <input
+                          type="number"
+                          step="0.01"
+                          value={r.price}
+                          onChange={(e) =>
+                            updatePrice(index, e.target.value)
+                          }
+                        />
+                      </span>
+                    </label>
+                  ))}
+
+                  <button
+                    type="button"
+                    className="submit-scan"
+                    onClick={submitScanned}
+                  >
+                    Submit these prices
+                  </button>
+                </div>
+              )}
+            </section>
+          </div>
+        )}
     </main>
   </div>
 );

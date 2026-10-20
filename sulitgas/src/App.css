@@ -156,7 +156,11 @@ button{
 
 
 .report-page {
+  width: 100%;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   background: var(--bg);
   color: var(--card-bg);
 }
@@ -734,13 +738,15 @@ button{
   }
 
   body {
-    overflow: hidden;
-    padding-bottom: 0;
-  }
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
-  #root {
-    overflow: hidden;
-  }
+#root {
+  min-height: 100vh;
+  height: auto;
+  overflow: visible;
+}
 
   .home-page {
      width: 100%;
@@ -920,108 +926,26 @@ button{
   cursor: pointer;
 }
 
-@media (min-width: 769px) {
-   .report-page {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 32px 40px 48px;
-    box-sizing: border-box;
-    color: var(--card-bg);
-    text-align: left;
-  }
-
-  .report-page > .app-title {
-    color: var(--card-bg);
-    text-align: center;
-    margin: 0 0 8px;
-    font-size: 2rem;
-  }
-
-  .report-page > p {
-    margin: 0 0 28px;
-  }
-
-   .report-mode-choice {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
-    max-width: none;
-    margin: 0 0 24px;
-  }
-
-  .report-mode-choice .mode-card {
-    min-height: 160px;
-    padding: 28px;
-    border-radius: 16px;
-    box-sizing: border-box;
-  }
-
-  .report-mode-choice .mode-icon {
-    color: var(--accent);
-    width: 48px;
-    font-size: 30px;
-  }
-
-  .report-mode-choice .mode-title {
-    font-size: 1.15rem;
-  }
-
-  .report-mode-choice .mode-desc {
-    line-height: 1.5;
-  }
-
-  .photo-upload {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
-    align-items: start;
-    gap: 24px;
-  }
-
-  .photo-upload .photo-drop {
-    width: 100%;
-    max-width: none;
-    min-height: 260px;
-    margin: 0;
-    box-sizing: border-box;
-  }
-
-  .photo-upload .photo-tips {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    box-sizing: border-box;
-  }
-
-  .photo-upload > img {
-    width: 100%;
-    max-height: 420px;
-    object-fit: contain;
-    grid-column: 1;
-  }
-
-  .photo-upload > .scan-results {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    grid-column: 1 / -1;
-  }
-}
 
 
 /* Header */
+
 .report-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 28px clamp(28px, 5vw, 72px);
+
+  width: 100%;
+  box-sizing: border-box;
+  padding: 28px max(32px, calc((100% - 1080px) / 2));
+
   background: var(--card-bg);
   color: var(--text);
+  border: none;
+  border-radius: 0;
 }
+
 
 .report-header h1 {
   margin: 0;
@@ -1229,6 +1153,7 @@ button{
 .photo-drop-title {
   font-size: 18px;
   font-weight: 800;
+  color: var(--card-bg);
 }
 
 .photo-drop-sub {
@@ -1370,5 +1295,87 @@ button{
 
   .report-method-card {
     min-height: 200px;
+  }
+}
+
+
+.report-header {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 0;
+  background: var(--card-bg);
+}
+
+
+.photo-upload {
+  width: 100%;
+  max-width: 1080px;
+  margin: 28px auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.photo-upload-panel,
+.photo-preview-panel {
+  min-width: 0;
+}
+
+.photo-upload-panel .photo-drop {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.photo-preview-panel {
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: #fbf5e9;
+  border: 1px solid #e5d7bd;
+}
+
+.photo-preview-title {
+  margin: 0 0 12px;
+  overflow-wrap: anywhere;
+  color: var(--card-bg);
+}
+
+.photo-preview-image {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #eee5d5;
+}
+
+.photo-preview-empty {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  border: 2px dashed #c8bda8;
+  border-radius: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.photo-preview-panel .submit-scan,
+.photo-preview-panel .scan-again {
+  margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+  .photo-upload {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .photo-preview-image {
+    max-height: 240px;
   }
 }
