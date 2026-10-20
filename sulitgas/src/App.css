@@ -1379,3 +1379,169 @@ button{
     max-height: 240px;
   }
 }
+
+
+
+
+/* Manual price form — visual refinement */
+.report-form {
+  width: 100%;
+  max-width: 760px;
+  box-sizing: border-box;
+  margin: 20px auto 48px;
+  padding: 30px;
+  background: #fbf5e9;
+  border: 1px solid #e5d7bd;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgb(0 50 98 / 8%);
+  color: var(--card-bg);
+  text-align: left;
+}
+
+.manual-form-heading {
+  margin-bottom: 0px;
+}
+
+.manual-form-heading h2 {
+  margin: 0 0 8px;
+  color: var(--card-bg);
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.manual-form-heading p,
+.manual-form-note {
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.fuel-price-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 10px;
+}
+
+.report-form .form-label {
+  display: block;
+  min-width: 0;
+  color: var(--card-bg);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.fuel-price-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 0 14px;
+  background: #ffffff;
+  border: 1px solid #d4c7b2;
+  border-radius: 10px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.fuel-price-input:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(245 166 35 / 18%);
+}
+
+.fuel-price-input > span {
+  flex-shrink: 0;
+  color: var(--card-bg);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.report-form .fuel-price-input .form-input {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  box-sizing: border-box;
+  padding: 10px 0;
+  background: transparent;
+  color: var(--card-bg);
+  border: none;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  font-size: 16px;
+}
+
+.report-form .fuel-price-input .form-input:focus {
+  outline: none;
+}
+
+.manual-form-note {
+  margin: 5px 0 0;
+}
+
+.manual-form-error {
+  margin: 12px 0;
+  color: #b42318;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.report-form .report-cta {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 5px;
+  padding: 14px 20px;
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--card-bg);
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.report-form .report-cta:hover {
+  background: #00447f;
+}
+
+.report-form .report-cta:active {
+  transform: translateY(1px);
+}
+
+.report-form .report-cta:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .report-form {
+    padding: 22px 18px;
+    margin-top: 20px;
+  }
+
+  .fuel-price-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .manual-form-heading h2 {
+    font-size: 23px;
+  }
+}
+
+body:has(.report-page) {
+  overflow: hidden;
+}
+
+body:has(.report-page) #root {
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.report-page {
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
