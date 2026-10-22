@@ -2,6 +2,7 @@ import {useState, useRef} from "react";
 import { useParams } from "react-router-dom";
 import ReportForm from "../ReportForm";
 import {PenLine, Camera, Image as ImageIcon} from "lucide-react";
+import { formatAddress } from "../utils/formatAddress";
 import {supabase} from "../supabaseClient";
 
 
@@ -104,8 +105,10 @@ return (
 
     <main className="report-content">
       <section className="report-station">
-        <span className="report-eyebrow">REPORTING FOR</span>
+        <span className="report-eyebrow">REPORTING PRICES FOR</span>
         <h2>{station.name}</h2>
+        <p style={{ color: "var(--card-muted)", textAlign: "left", fontSize: "0.9rem" }}>
+         {formatAddress(station)} </p>
         {station.address && <p>{station.address}</p>}
       </section>
 

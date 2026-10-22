@@ -5,10 +5,19 @@ export default function StationList({ stations, fuel, searchTerm, userLocation, 
 
   const RADIUS_KM = 5;
 
-  let visibleStations = stations.filter((station) =>
-    station.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    station.barangay.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    const words = searchTerm
+    .toLowerCase()
+    .replace(/brgy\.?|barangay/g, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+
+  let visibleStations = stations.filter((station) => {
+    const searchable = [station.name, station.road, station.barangay, station.city]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return words.every((w) => searchable.includes(w));
+  });
 
   if (userLocation) {
     visibleStations = visibleStations
