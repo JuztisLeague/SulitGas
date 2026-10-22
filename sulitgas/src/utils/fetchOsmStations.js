@@ -15,12 +15,12 @@ export async function importOsmStations() {
   console.log("Imported successfully:", transformed.length, "stations");
 }
 
-export async function fetchOsmStations() {
+export async function fetchOsmStations(box = "10.20,123.90,10.36,124.05") {
   const query = `
-    [out:json];
+    [out:json][timeout:90];
     (
-      node["amenity"="fuel"](10.20,123.90,10.36,124.05);
-      way["amenity"="fuel"](10.20,123.90,10.36,124.05);
+      node["amenity"="fuel"](${box});
+      way["amenity"="fuel"](${box});
     );
     out center;
   `;
